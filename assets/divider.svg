@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="28" viewBox="0 0 800 28" role="img" aria-label="Divider">
+  <title>Divider</title>
+  <defs>
+    <linearGradient id="gCard" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE9CC"/><stop offset=".55" stop-color="#FFDBB0"/><stop offset="1" stop-color="#FFD2A2"/></linearGradient>
+    <linearGradient id="gYellow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFEC"/><stop offset=".55" stop-color="#FFFAD3"/><stop offset="1" stop-color="#FFF0B3"/></linearGradient>
+    <linearGradient id="gAccent" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFC9C9"/><stop offset=".55" stop-color="#FFB1B1"/><stop offset="1" stop-color="#FFA0A0"/></linearGradient>
+    <linearGradient id="gChip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFDDD0"/><stop offset="1" stop-color="#FFCCB8"/></linearGradient>
+    <linearGradient id="gEdge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity=".15"/></linearGradient>
+    <linearGradient id="gGloss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="gShine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="gLine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFCCB8" stop-opacity="0"/><stop offset=".2" stop-color="#FFCCB8"/><stop offset=".8" stop-color="#FFCCB8"/><stop offset="1" stop-color="#FFCCB8" stop-opacity="0"/></linearGradient>
+  </defs>
+  <style>
+.fl{animation:fl 6s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.sh{animation:sh 8s ease-in-out infinite}
+@keyframes sh{0%{transform:translateX(0)}45%,100%{transform:translateX(1120px)}}
+.dr{animation:dr 9s ease-in-out infinite}
+@keyframes dr{0%,100%{transform:translate(0,0)}50%{transform:translate(-10px,8px)}}
+.up{animation:up .7s ease-out both}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.gr{transform-box:fill-box;transform-origin:0 50%;animation:gr 1.3s cubic-bezier(.2,.8,.2,1) both}
+@keyframes gr{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.nu{animation:nu 2.4s ease-in-out infinite}
+@keyframes nu{0%,100%{transform:translate(0,0)}50%{transform:translate(3px,-3px)}}
+.nr{animation:nr 2.4s ease-in-out infinite}
+@keyframes nr{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+.pu{transform-box:fill-box;transform-origin:center;animation:pu 2.6s ease-out infinite}
+@keyframes pu{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.9);opacity:0}}
+.bn{animation:bn 1.6s ease-in-out infinite}
+@keyframes bn{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.ul{transform-box:fill-box;transform-origin:center;animation:ul 3.2s ease-in-out infinite}
+@keyframes ul{0%,100%{transform:scaleX(.55)}50%{transform:scaleX(1)}}
+.tv{animation:tv 7s ease-in-out infinite alternate}
+@keyframes tv{from{transform:translateX(0)}to{transform:translateX(680px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+  <rect width="800" height="28" rx="14" fill="#FFFAD3"/>
+  <rect x="30" y="13" width="740" height="2.5" rx="1.25" fill="url(#gLine)"/>
+  <g class="tv"><circle cx="60" cy="14" r="3.5" fill="#FFB1B1"/></g>
+  <circle class="pu" cx="400" cy="14" r="7" fill="none" stroke="#FFB1B1" stroke-width="2"/>
+  <circle cx="400" cy="14" r="7" fill="url(#gAccent)"/>
+  <circle cx="400" cy="14" r="2.5" fill="#fff" fill-opacity=".8"/>
+</svg>
