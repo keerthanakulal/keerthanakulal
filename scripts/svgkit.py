@@ -64,13 +64,14 @@ def doc(W, H, title, body, tv=0):
             f'  <style>{css}</style>\n{body}</svg>\n')
 
 
-def slab(W, FH, content, fill="gCard", side="#EDBE93", r=16, delay=0, shine=True, decor=""):
+def slab(W, FH, content, fill="gCard", side="#EDBE93", r=16, delay=0, shine=True, decor="", ox=0):
     """A rounded card with a solid 3D edge underneath, gloss on top and a moving shine.
-    `content` is drawn in card coordinates (0,0 is the card's top-left corner)."""
+    `content` is drawn in card coordinates (0,0 is the card's top-left corner).
+    `ox` shifts the card sideways so a pair of cards can sit flush at both outer edges."""
     clip = f'<clipPath id="face"><rect width="{W}" height="{FH}" rx="{r}"/></clipPath>'
     sh = (f'<g class="sh" style="animation-delay:-{delay}s"><rect x="-170" y="-20" width="80" '
           f'height="{FH + 40}" fill="url(#gShine)" transform="skewX(-20)"/></g>') if shine else ""
-    return (f'  <g transform="translate(0,{MT})">\n    {clip}\n'
+    return (f'  <g transform="translate({ox},{MT})">\n    {clip}\n'
             f'    <rect y="{D}" width="{W}" height="{FH}" rx="{r}" fill="{side}"/>\n'
             f'    <g class="fl" style="animation-delay:-{delay}s">\n'
             f'      <rect x=".75" y=".75" width="{W - 1.5}" height="{FH - 1.5}" rx="{r}" fill="url(#{fill})" '

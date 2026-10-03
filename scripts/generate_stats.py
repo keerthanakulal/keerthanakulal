@@ -16,7 +16,7 @@ from svgkit import CHIP, INK2, doc, header_bar, slab, text, total_height
 
 USER = "keerthanakulal"
 ASSETS = Path(__file__).resolve().parent.parent / "assets"
-W, FH = 380, 276
+DOC_W, W, FH = 380, 368, 276  # W is the card itself; DOC_W leaves a 12px gutter on one side
 TOP_LANGS = 6
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
 
@@ -92,8 +92,8 @@ def stats_card(d):
         if i < len(rows) - 1:
             body += f'<rect x="24" y="{y + 11}" width="{W - 48}" height="1.5" rx=".75" fill="url(#gLine)"/>'
         alt.append(f"{label}: {'not available' if val is None else val}")
-    return doc(W, total_height(FH), "GitHub stats for keerthanakulal. " + ". ".join(alt),
-               slab(W, FH, body, delay=0))
+    return doc(DOC_W, total_height(FH), "GitHub stats for keerthanakulal. " + ". ".join(alt),
+               slab(W, FH, body, delay=0, ox=0))
 
 
 def langs_card(d):
@@ -110,8 +110,8 @@ def langs_card(d):
         body += (f'<rect class="gr" style="animation-delay:{i * .12:.2f}s" x="24" y="{y + 7}" '
                  f'width="{max(bar_w * pct / 100, 9):.1f}" height="9" rx="4.5" fill="url(#gAccent)"/>')
         alt.append(f"{lang} {pct:.1f}%")
-    return doc(W, total_height(FH), "Top languages by code size across public repositories: " + ", ".join(alt),
-               slab(W, FH, body, delay=0))
+    return doc(DOC_W, total_height(FH), "Top languages by code size across public repositories: " + ", ".join(alt),
+               slab(W, FH, body, delay=0, ox=DOC_W - W))
 
 
 def main():
