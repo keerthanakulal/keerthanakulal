@@ -11,7 +11,7 @@ gutter in the middle and a 16px margin at the outer edges.
 import textwrap
 from pathlib import Path
 
-from svgkit import (ACCENT, CARD, CHIP, INK, INK2, D, arrow_up_right, chip, doc, pagebg, slab, sparkle,
+from svgkit import (ACCENT, CARD, CHIP, DARK, INK, INK2, NAVY0, D, arrow_up_right, chip, doc, pagebg, slab, sparkle,
                     text)
 
 ASSETS = Path(__file__).resolve().parent.parent / "assets"
@@ -30,7 +30,7 @@ save("divider.svg", doc(FULL, H, "Divider", pagebg(FULL, H, seed=11) + f'''  <re
   <g class="tv"><circle cx="70" cy="18" r="3.5" fill="{ACCENT}"/></g>
   <circle class="pu" cx="{FULL / 2}" cy="18" r="8" fill="none" stroke="{ACCENT}" stroke-width="2"/>
   <g class="rot"><rect x="{FULL / 2 - 6}" y="12" width="12" height="12" rx="3" fill="url(#gAccent)" transform="rotate(45 {FULL / 2} 18)"/></g>
-  <circle cx="{FULL / 2}" cy="18" r="2.4" fill="#fff" fill-opacity=".85"/>
+  <circle cx="{FULL / 2}" cy="18" r="2.4" fill="{DARK}" fill-opacity=".55"/>
   {sparkle(FULL / 2 - 70, 18, .8, 0.5)}{sparkle(FULL / 2 + 70, 18, .8, 1.7)}
 ''', tv=FULL - 140))
 
@@ -51,14 +51,14 @@ for fn, label, seed in [("h-featured-projects", "Featured Projects", 21), ("h-te
 # --- about card --------------------------------------------------------------
 TOP, FH = 22, 168
 H = TOP + FH + D + 10
-decor = (f'<g class="dr"><circle cx="{CARD_W - 40}" cy="20" r="112" fill="{ACCENT}" fill-opacity=".30"/>'
-         f'<circle cx="{CARD_W - 130}" cy="{FH - 4}" r="56" fill="{CHIP}" fill-opacity=".65"/>'
-         f'<circle cx="{CARD_W - 28}" cy="{FH - 40}" r="7" fill="#fff" fill-opacity=".6"/></g>')
+decor = (f'<g class="dr"><circle cx="{CARD_W - 40}" cy="20" r="112" fill="{ACCENT}" fill-opacity=".07"/>'
+         f'<circle cx="{CARD_W - 130}" cy="{FH - 4}" r="56" fill="{CHIP}" fill-opacity=".55"/>'
+         f'<circle cx="{CARD_W - 28}" cy="{FH - 40}" r="7" fill="{ACCENT}" fill-opacity=".5"/></g>')
 cy = FH // 2
 c = (f'<circle class="rot" cx="96" cy="{cy}" r="64" fill="none" stroke="{ACCENT}" stroke-width="2.5" stroke-dasharray="3 9" stroke-linecap="round"/>'
-     f'<circle cx="96" cy="{cy}" r="58" fill="#fff" fill-opacity=".45"/>'
-     f'<circle cx="96" cy="{cy}" r="50" fill="url(#gAccent)" stroke="#fff" stroke-opacity=".8" stroke-width="3"/>'
-     + text(96, cy + 19, "K", 56, 700, anchor="middle") +
+     f'<circle cx="96" cy="{cy}" r="58" fill="{ACCENT}" fill-opacity=".12"/>'
+     f'<circle cx="96" cy="{cy}" r="50" fill="url(#gAccent)" stroke="{CARD}" stroke-width="3"/>'
+     + text(96, cy + 19, "K", 56, 700, DARK, "middle") +
      text(180, cy - 6, "Keerthana", 54, 700) +
      text(182, cy + 32, "B.E. CSE (AI & ML) · Machine Learning · NLP", 20, 400, INK2) +
      f'<rect x="182" y="{cy + 48}" width="72" height="6" rx="3" fill="url(#gAccent)"/>'
@@ -74,7 +74,7 @@ H = PT + FH + D + 4
 def card(fn, title, desc, tags, alt, delay, right, seed):
     size = 21 if len(title) <= 22 else 16
     c = (f'<rect x="26" y="26" width="40" height="6" rx="3" fill="url(#gAccent)"/>'
-         f'<circle cx="{PAIR_W - 36}" cy="34" r="17" fill="#fff" fill-opacity=".5"/>'
+         f'<circle cx="{PAIR_W - 36}" cy="34" r="17" fill="{ACCENT}" fill-opacity=".2"/>'
          f'<circle cx="{PAIR_W - 36}" cy="34" r="15" fill="url(#gAccent)"/>' + arrow_up_right(PAIR_W - 36, 34) +
          text(26, 68, title, size, 700))
     for i, line in enumerate(textwrap.wrap(desc, 40)):
@@ -101,15 +101,15 @@ card("card-resume-analyzer.svg", "AI Resume Analyzer & Job Matcher", "Matches re
      "AI Resume Analyzer and Job Matcher: matches resumes to job descriptions with a match score. Python, Flask, NLP, Sentence-BERT",
      3, False, 43)
 
-c = (text(PAIR_W / 2, 92, "View all repos", 26, 700, anchor="middle") +
-     f'<circle class="pu" cx="{PAIR_W / 2}" cy="132" r="18" fill="none" stroke="#fff" stroke-width="2"/>'
-     f'<circle cx="{PAIR_W / 2}" cy="132" r="21" fill="#fff" fill-opacity=".55"/>'
+c = (text(PAIR_W / 2, 92, "View all repos", 26, 700, DARK, "middle") +
+     f'<circle class="pu" cx="{PAIR_W / 2}" cy="132" r="18" fill="none" stroke="{DARK}" stroke-width="2"/>'
+     f'<circle cx="{PAIR_W / 2}" cy="132" r="21" fill="{DARK}" fill-opacity=".18"/>'
      f'<circle cx="{PAIR_W / 2}" cy="132" r="18" fill="{CARD}"/>'
      f'<g transform="translate({PAIR_W / 2 - 6},132)"><g class="nr"><path d="M-6 0 H8 M2 -6 L8 0 L2 6" fill="none" '
      f'stroke="{INK}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g></g>'
-     + sparkle(40, 50, .9, 0) + sparkle(PAIR_W - 44, 160, 1, 1.1) + sparkle(PAIR_W - 70, 44, .6, 2))
+     + sparkle(40, 50, .9, 0, DARK) + sparkle(PAIR_W - 44, 160, 1, 1.1, DARK) + sparkle(PAIR_W - 70, 44, .6, 2, DARK))
 save("card-view-all.svg", doc(HALF, H, "View all repos", pagebg(HALF, H, seed=44) +
-     slab(PAIR_W, FH, c, fill="gAccent", side="#E89A9A", delay=3, ox=6, oy=PT)))
+     slab(PAIR_W, FH, c, fill="gAccent", side="#B8A66E", delay=3, ox=6, oy=PT)))
 
 # --- tech stack --------------------------------------------------------------
 groups = [("Languages", ["C", "C++", "Java", "JavaScript", "Python", "PowerShell"]),
@@ -157,14 +157,14 @@ save("footer.svg", doc(FULL, H, "Thanks for visiting", pagebg(FULL, H, bottom=Tr
 # --- badges ------------------------------------------------------------------
 def badge(fn, label, icon, delay, seed):
     H = 8 + 52 + D + 8
-    c = ('<circle class="pu" cx="36" cy="26" r="15" fill="none" stroke="#fff" stroke-width="2"/>'
-         '<circle cx="36" cy="26" r="17" fill="#fff" fill-opacity=".5"/>'
-         f'<circle cx="36" cy="26" r="15" fill="{CARD}"/>' + icon + text(132, 33, label, 20, 700, anchor="middle"))
+    c = (f'<circle class="pu" cx="36" cy="26" r="15" fill="none" stroke="{DARK}" stroke-width="2"/>'
+         f'<circle cx="36" cy="26" r="17" fill="{DARK}" fill-opacity=".2"/>'
+         f'<circle cx="36" cy="26" r="15" fill="{CARD}"/>' + icon + text(132, 33, label, 20, 700, DARK, "middle"))
     save(fn, doc(HALF, H, label + " badge", pagebg(HALF, H, seed=seed) +
-         slab(220, 52, c, fill="gAccent", side="#E89A9A", r=26, delay=delay, ox=(HALF - 220) // 2, oy=8)))
+         slab(220, 52, c, fill="gAccent", side="#B8A66E", r=26, delay=delay, ox=(HALF - 220) // 2, oy=8)))
 
 
-badge("badge-linkedin.svg", "LinkedIn", arrow_up_right(36, 26), 0, 71)
+badge("badge-linkedin.svg", "LinkedIn", arrow_up_right(36, 26, color=INK), 0, 71)
 badge("badge-email.svg", "Email",
       f'<g transform="translate(36,26)"><rect x="-8.5" y="-6" width="17" height="12" rx="2.5" fill="none" '
       f'stroke="{INK}" stroke-width="2"/><path d="M-8 -5 L0 2 L8 -5" fill="none" stroke="{INK}" stroke-width="2" '

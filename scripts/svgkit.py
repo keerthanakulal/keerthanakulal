@@ -5,18 +5,19 @@ switched off for viewers who prefer reduced motion.
 """
 
 FONT = "'Segoe UI', Arial, sans-serif"
-INK, INK2 = "#4A2C1D", "#7A5240"
-PAGE, CARD, CHIP, ACCENT = "#FFFAD3", "#FFDBB0", "#FFCCB8", "#FFB1B1"
+# Palette: four colors, plus a few mixes of them for depth
+NAVY0, NAVY1, NAVY2, CREAM = "#010736", "#0D1C42", "#22396F", "#FCF1D0"
+INK, INK2, DARK = CREAM, "#B4B1A5", NAVY0      # text on dark, secondary text, text on cream
+PAGE, CARD, CHIP, ACCENT = NAVY0, NAVY1, NAVY2, CREAM
 MT, D = 4, 8  # top margin for the float animation, depth of the 3D edge
 
 DEFS = f"""  <defs>
-    <linearGradient id="gCard" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE9CC"/><stop offset=".55" stop-color="{CARD}"/><stop offset="1" stop-color="#FFD2A2"/></linearGradient>
-    <linearGradient id="gYellow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFEC"/><stop offset=".55" stop-color="{PAGE}"/><stop offset="1" stop-color="#FFF0B3"/></linearGradient>
-    <linearGradient id="gAccent" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFC9C9"/><stop offset=".55" stop-color="{ACCENT}"/><stop offset="1" stop-color="#FFA0A0"/></linearGradient>
-    <linearGradient id="gChip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFDDD0"/><stop offset="1" stop-color="{CHIP}"/></linearGradient>
-    <linearGradient id="gEdge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity=".15"/></linearGradient>
-    <linearGradient id="gGloss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-    <linearGradient id="gShine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="gCard" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A2E5E"/><stop offset=".5" stop-color="{CARD}"/><stop offset="1" stop-color="#091340"/></linearGradient>
+    <linearGradient id="gAccent" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8E6"/><stop offset=".55" stop-color="{CREAM}"/><stop offset="1" stop-color="#EBDAAA"/></linearGradient>
+    <linearGradient id="gChip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E4A88"/><stop offset="1" stop-color="{CHIP}"/></linearGradient>
+    <linearGradient id="gEdge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{CREAM}" stop-opacity=".55"/><stop offset="1" stop-color="{CREAM}" stop-opacity=".06"/></linearGradient>
+    <linearGradient id="gGloss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{CREAM}" stop-opacity=".12"/><stop offset="1" stop-color="{CREAM}" stop-opacity="0"/></linearGradient>
+    <linearGradient id="gShine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="{CREAM}" stop-opacity="0"/><stop offset=".5" stop-color="{CREAM}" stop-opacity=".22"/><stop offset="1" stop-color="{CREAM}" stop-opacity="0"/></linearGradient>
     <linearGradient id="gLine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="{CHIP}" stop-opacity="0"/><stop offset=".2" stop-color="{CHIP}"/><stop offset=".8" stop-color="{CHIP}"/><stop offset="1" stop-color="{CHIP}" stop-opacity="0"/></linearGradient>
   </defs>
 """
@@ -70,7 +71,7 @@ def doc(W, H, title, body, tv=0):
             f'  <style>{css}</style>\n{body}</svg>\n')
 
 
-def slab(W, FH, content, fill="gCard", side="#EDBE93", r=16, delay=0, shine=True, decor="", ox=0, oy=MT):
+def slab(W, FH, content, fill="gCard", side="#1B3166", r=16, delay=0, shine=True, decor="", ox=0, oy=MT):
     """A rounded card with a solid 3D edge underneath, gloss on top and a moving shine.
     `content` is drawn in card coordinates (0,0 is the card's top-left corner).
     `ox` shifts the card sideways so a pair of cards can sit flush at both outer edges."""
@@ -93,14 +94,14 @@ def total_height(FH):
 def chip(x, y, label, size=13, h=26, delay=None):
     w = round(len(label) * size * 0.56 + 24)
     cls = f' class="upw" style="animation-delay:{delay:.2f}s,{delay + .7:.2f}s"' if delay is not None else ""
-    return w, (f'<g{cls}><rect x="{x}" y="{y + 2}" width="{w}" height="{h}" rx="{h / 2}" fill="#F2B4A0"/>'
+    return w, (f'<g{cls}><rect x="{x}" y="{y + 2}" width="{w}" height="{h}" rx="{h / 2}" fill="#162A58"/>'
                f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{h / 2}" fill="url(#gChip)"/>'
                + text(x + w / 2, y + h / 2 + 4.5, label, size, 500, anchor="middle") + '</g>\n')
 
 
-def arrow_up_right(cx, cy, cls="nu"):
+def arrow_up_right(cx, cy, cls="nu", color=DARK):
     return (f'<g transform="translate({cx},{cy})"><g class="{cls}"><path d="M-5 5 L5 -5 M-2 -5 H5 V2" fill="none" '
-            f'stroke="{INK}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g></g>')
+            f'stroke="{color}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g></g>')
 
 
 def header_bar(title):
@@ -109,13 +110,13 @@ def header_bar(title):
             f'<rect x="24" y="54" width="40" height="5" rx="2.5" fill="url(#gAccent)"/>')
 
 
-def sparkle(x, y, size=1.0, delay=0):
+def sparkle(x, y, size=1.0, delay=0, color=ACCENT):
     return (f'<path class="tw" style="animation-delay:-{delay}s" transform="translate({x},{y}) scale({size})" '
-            f'd="M0 -8 Q1 -1 8 0 Q1 1 0 8 Q-1 1 -8 0 Q-1 -1 0 -8Z" fill="{ACCENT}"/>')
+            f'd="M0 -8 Q1 -1 8 0 Q1 1 0 8 Q-1 1 -8 0 Q-1 -1 0 -8Z" fill="{color}"/>')
 
 
 def pagebg(W, H, top=False, bottom=False, r=28, seed=1):
-    """Full-bleed theme-colored background (so no dark page shows through) with drifting bubbles.
+    """Full-bleed theme-colored background (so the page color never shows through) with drifting bubbles.
     `top` / `bottom` round those corners for the first and last piece of the page."""
     import random
     rt, rb = (r if top else 0), (r if bottom else 0)
@@ -124,7 +125,7 @@ def pagebg(W, H, top=False, bottom=False, r=28, seed=1):
     rnd = random.Random(seed)
     bubbles = ""
     for i in range(6 if H >= 60 else 0):  # thin pieces get none; bubbles never touch the top or bottom edge
-        col, op = (ACCENT, .16) if i % 2 == 0 else (CHIP, .45)
+        col, op = (ACCENT, .05) if i % 2 == 0 else (CHIP, .35)
         r_ = rnd.randint(10, max(10, min(40, (H - 12) // 2)))
         bubbles += (f'<circle class="dr" style="animation-duration:{rnd.randint(8, 14)}s;animation-delay:-{rnd.randint(0, 9)}s" '
                     f'cx="{rnd.randint(0, W)}" cy="{rnd.randint(r_ + 6, H - r_ - 6)}" r="{r_}" fill="{col}" fill-opacity="{op}"/>')
