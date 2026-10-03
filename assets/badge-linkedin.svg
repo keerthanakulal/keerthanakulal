@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="220" height="64" viewBox="0 0 220 64" role="img" aria-label="LinkedIn badge">
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="76" viewBox="0 0 380 76" role="img" aria-label="LinkedIn badge">
   <title>LinkedIn badge</title>
   <defs>
     <linearGradient id="gCard" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE9CC"/><stop offset=".55" stop-color="#FFDBB0"/><stop offset="1" stop-color="#FFD2A2"/></linearGradient>
@@ -14,7 +14,7 @@
 .fl{animation:fl 6s ease-in-out infinite}
 @keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 .sh{animation:sh 8s ease-in-out infinite}
-@keyframes sh{0%{transform:translateX(0)}45%,100%{transform:translateX(540px)}}
+@keyframes sh{0%{transform:translateX(0)}45%,100%{transform:translateX(700px)}}
 .dr{animation:dr 9s ease-in-out infinite}
 @keyframes dr{0%,100%{transform:translate(0,0)}50%{transform:translate(-10px,8px)}}
 .up{animation:up .7s ease-out both}
@@ -33,9 +33,18 @@
 @keyframes ul{0%,100%{transform:scaleX(.55)}50%{transform:scaleX(1)}}
 .tv{animation:tv 7s ease-in-out infinite alternate}
 @keyframes tv{from{transform:translateX(0)}to{transform:translateX(0px)}}
+.tw{transform-box:fill-box;transform-origin:center;animation:tw 3s ease-in-out infinite}
+@keyframes tw{0%,100%{transform:scale(.35) rotate(0);opacity:.35}50%{transform:scale(1) rotate(45deg);opacity:1}}
+.rot{transform-box:fill-box;transform-origin:center;animation:rot 18s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.upw{animation:up .7s ease-out both,wv 4.5s ease-in-out infinite}
+@keyframes wv{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
-  <g transform="translate(0,4)">
+  <clipPath id="pg"><path d="M0 0 Q0 0 0 0 H380 Q380 0 380 0 V76 Q380 76 380 76 H0 Q0 76 0 76 Z"/></clipPath>
+  <path d="M0 0 Q0 0 0 0 H380 Q380 0 380 0 V76 Q380 76 380 76 H0 Q0 76 0 76 Z" fill="#FFFAD3"/>
+  <g clip-path="url(#pg)"><circle class="dr" style="animation-duration:12s;animation-delay:-9s" cx="4" cy="34" r="20" fill="#FFB1B1" fill-opacity="0.16"/><circle class="dr" style="animation-duration:14s;animation-delay:-3s" cx="134" cy="25" r="14" fill="#FFCCB8" fill-opacity="0.45"/><circle class="dr" style="animation-duration:12s;animation-delay:-0s" cx="304" cy="34" r="16" fill="#FFB1B1" fill-opacity="0.16"/><circle class="dr" style="animation-duration:8s;animation-delay:-8s" cx="187" cy="39" r="26" fill="#FFCCB8" fill-opacity="0.45"/><circle class="dr" style="animation-duration:10s;animation-delay:-2s" cx="18" cy="42" r="14" fill="#FFB1B1" fill-opacity="0.16"/><circle class="dr" style="animation-duration:8s;animation-delay:-6s" cx="331" cy="39" r="29" fill="#FFCCB8" fill-opacity="0.45"/></g>
+  <g transform="translate(80,8)">
     <clipPath id="face"><rect width="220" height="52" rx="26"/></clipPath>
     <rect y="8" width="220" height="52" rx="26" fill="#E89A9A"/>
     <g class="fl" style="animation-delay:-0s">

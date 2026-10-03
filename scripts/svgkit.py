@@ -44,6 +44,12 @@ CSS = """
 @keyframes ul{0%,100%{transform:scaleX(.55)}50%{transform:scaleX(1)}}
 .tv{animation:tv 7s ease-in-out infinite alternate}
 @keyframes tv{from{transform:translateX(0)}to{transform:translateX(TVWpx)}}
+.tw{transform-box:fill-box;transform-origin:center;animation:tw 3s ease-in-out infinite}
+@keyframes tw{0%,100%{transform:scale(.35) rotate(0);opacity:.35}50%{transform:scale(1) rotate(45deg);opacity:1}}
+.rot{transform-box:fill-box;transform-origin:center;animation:rot 18s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.upw{animation:up .7s ease-out both,wv 4.5s ease-in-out infinite}
+@keyframes wv{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 """
 
@@ -64,14 +70,14 @@ def doc(W, H, title, body, tv=0):
             f'  <style>{css}</style>\n{body}</svg>\n')
 
 
-def slab(W, FH, content, fill="gCard", side="#EDBE93", r=16, delay=0, shine=True, decor="", ox=0):
+def slab(W, FH, content, fill="gCard", side="#EDBE93", r=16, delay=0, shine=True, decor="", ox=0, oy=MT):
     """A rounded card with a solid 3D edge underneath, gloss on top and a moving shine.
     `content` is drawn in card coordinates (0,0 is the card's top-left corner).
     `ox` shifts the card sideways so a pair of cards can sit flush at both outer edges."""
     clip = f'<clipPath id="face"><rect width="{W}" height="{FH}" rx="{r}"/></clipPath>'
     sh = (f'<g class="sh" style="animation-delay:-{delay}s"><rect x="-170" y="-20" width="80" '
           f'height="{FH + 40}" fill="url(#gShine)" transform="skewX(-20)"/></g>') if shine else ""
-    return (f'  <g transform="translate({ox},{MT})">\n    {clip}\n'
+    return (f'  <g transform="translate({ox},{oy})">\n    {clip}\n'
             f'    <rect y="{D}" width="{W}" height="{FH}" rx="{r}" fill="{side}"/>\n'
             f'    <g class="fl" style="animation-delay:-{delay}s">\n'
             f'      <rect x=".75" y=".75" width="{W - 1.5}" height="{FH - 1.5}" rx="{r}" fill="url(#{fill})" '
@@ -86,7 +92,7 @@ def total_height(FH):
 
 def chip(x, y, label, size=13, h=26, delay=None):
     w = round(len(label) * size * 0.56 + 24)
-    cls = f' class="up" style="animation-delay:{delay:.2f}s"' if delay is not None else ""
+    cls = f' class="upw" style="animation-delay:{delay:.2f}s,{delay + .7:.2f}s"' if delay is not None else ""
     return w, (f'<g{cls}><rect x="{x}" y="{y + 2}" width="{w}" height="{h}" rx="{h / 2}" fill="#F2B4A0"/>'
                f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{h / 2}" fill="url(#gChip)"/>'
                + text(x + w / 2, y + h / 2 + 4.5, label, size, 500, anchor="middle") + '</g>\n')
@@ -101,3 +107,26 @@ def header_bar(title):
     """Accent pill and title used at the top of the stats cards."""
     return (text(24, 44, title, 22, 700) +
             f'<rect x="24" y="54" width="40" height="5" rx="2.5" fill="url(#gAccent)"/>')
+
+
+def sparkle(x, y, size=1.0, delay=0):
+    return (f'<path class="tw" style="animation-delay:-{delay}s" transform="translate({x},{y}) scale({size})" '
+            f'd="M0 -8 Q1 -1 8 0 Q1 1 0 8 Q-1 1 -8 0 Q-1 -1 0 -8Z" fill="{ACCENT}"/>')
+
+
+def pagebg(W, H, top=False, bottom=False, r=28, seed=1):
+    """Full-bleed theme-colored background (so no dark page shows through) with drifting bubbles.
+    `top` / `bottom` round those corners for the first and last piece of the page."""
+    import random
+    rt, rb = (r if top else 0), (r if bottom else 0)
+    d = (f"M0 {rt} Q0 0 {rt} 0 H{W - rt} Q{W} 0 {W} {rt} V{H - rb} Q{W} {H} {W - rb} {H} "
+         f"H{rb} Q0 {H} 0 {H - rb} Z")
+    rnd = random.Random(seed)
+    bubbles = ""
+    for i in range(6 if H >= 60 else 0):  # thin pieces get none; bubbles never touch the top or bottom edge
+        col, op = (ACCENT, .16) if i % 2 == 0 else (CHIP, .45)
+        r_ = rnd.randint(10, max(10, min(40, (H - 12) // 2)))
+        bubbles += (f'<circle class="dr" style="animation-duration:{rnd.randint(8, 14)}s;animation-delay:-{rnd.randint(0, 9)}s" '
+                    f'cx="{rnd.randint(0, W)}" cy="{rnd.randint(r_ + 6, H - r_ - 6)}" r="{r_}" fill="{col}" fill-opacity="{op}"/>')
+    return (f'  <clipPath id="pg"><path d="{d}"/></clipPath>\n  <path d="{d}" fill="{PAGE}"/>\n'
+            f'  <g clip-path="url(#pg)">{bubbles}</g>\n')

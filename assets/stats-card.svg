@@ -33,6 +33,12 @@
 @keyframes ul{0%,100%{transform:scaleX(.55)}50%{transform:scaleX(1)}}
 .tv{animation:tv 7s ease-in-out infinite alternate}
 @keyframes tv{from{transform:translateX(0)}to{transform:translateX(0px)}}
+.tw{transform-box:fill-box;transform-origin:center;animation:tw 3s ease-in-out infinite}
+@keyframes tw{0%,100%{transform:scale(.35) rotate(0);opacity:.35}50%{transform:scale(1) rotate(45deg);opacity:1}}
+.rot{transform-box:fill-box;transform-origin:center;animation:rot 18s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.upw{animation:up .7s ease-out both,wv 4.5s ease-in-out infinite}
+@keyframes wv{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
   <g transform="translate(0,4)">
