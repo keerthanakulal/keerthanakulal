@@ -27,8 +27,9 @@
 <br>
 <img align="top" src="assets/h-lets-connect.svg" width="760" alt="Section heading: Let's Connect">
 <br>
-<a href="https://www.linkedin.com/in/keerthanakulal/"><img align="top" src="assets/badge-linkedin.svg" width="380" alt="Connect with Keerthana on LinkedIn"></a><a href="mailto:keerthanakulal23@gmail.com"><img align="top" src="assets/badge-email.svg" width="380" alt="Email Keerthana"></a>
+<a href="https://www.linkedin.com/in/keerthanakulal/"><img align="top" src="assets/badge-linkedin.svg" width="380" alt="Connect with Keerthana on LinkedIn"></a><a href="https://mail.google.com/mail/?view=cm&fs=1&to=keerthanakulal23@gmail.com"><img align="top" src="assets/badge-email.svg" width="380" alt="Email Keerthana"></a>
 <br>
+  <sub>keerthanakulal23@gmail.com</sub>
 <img align="top" src="assets/divider.svg" width="760" alt="Decorative divider line">
 <br>
 <img align="top" src="assets/footer.svg" width="760" alt="Thanks for visiting">
